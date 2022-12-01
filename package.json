@@ -1,0 +1,29 @@
+{
+  "name": "advent-of-code-2022",
+  "version": "1.0.0",
+  "description": "Advent of Code 2022",
+  "main": "index.js",
+  "scripts": {
+    "check": "rome check *.ts && rome format *.ts --write",
+    "dev": "vitest dev",
+    "test": "vitest",
+    "start": "ts-node --swc run.ts --silent"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tcrammond/advent-of-code-2022.git"
+  },
+  "author": "Tyler Crammond",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tcrammond/advent-of-code-2022/issues"
+  },
+  "homepage": "https://github.com/tcrammond/advent-of-code-2022#readme",
+  "devDependencies": {
+    "@swc/cli": "^0.1.57",
+    "@swc/core": "^1.3.21",
+    "rome": "^10.0.1",
+    "ts-node": "^10.9.1",
+    "vitest": "^0.25.3"
+  }
+}

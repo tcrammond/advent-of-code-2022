@@ -1,0 +1,23 @@
+{
+  "formatter": {
+    "ignore": [
+      "dist",
+      "node_modules/*"
+    ]
+  },
+  "linter": {
+    "enabled": true,
+    "ignore": [
+      "dist",
+      "node_modules/*"
+    ],
+    "rules": {
+      "recommended": true
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  }
+}
