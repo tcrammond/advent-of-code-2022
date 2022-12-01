@@ -4,7 +4,7 @@
   "description": "Advent of Code 2022",
   "main": "index.js",
   "scripts": {
-    "check": "rome check *.ts && rome format *.ts --write",
+    "check": "rome check **/**/*.ts && rome format **/**/*.ts --write",
     "dev": "vitest dev",
     "test": "vitest",
     "start": "ts-node --swc run.ts --silent"
