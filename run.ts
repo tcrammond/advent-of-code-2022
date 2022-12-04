@@ -47,7 +47,7 @@ async function executeDay(day: string, part: string) {
 	const name = `./src/${lp(day)}/${part}.ts`;
 	try {
 		const module = await import(name);
-		const input = fs.readFileSync(name.replace('.ts', '.txt'), 'utf8');
+		const input = fs.readFileSync(name.replace(`${part}.ts`, 'input.txt'), 'utf8');
 		log(day, part, module.default(input));
 	} catch (error) {
 		if (error.message.includes('find module')) {
