@@ -1,7 +1,7 @@
 import { lines } from '../util';
 
-const az = 'abcdefghijklmnopqrstuvwxyz';
-const AZ = az.toUpperCase();
+export const az = 'abcdefghijklmnopqrstuvwxyz';
+export const AZ = az.toUpperCase();
 
 export default function getScore(input: string) {
 	return lines(input).reduce((sum, line) => {
@@ -9,24 +9,16 @@ export default function getScore(input: string) {
 			new Set(line.slice(0, line.length / 2).split('')),
 			new Set(line.slice(line.length / 2).split('')),
 		];
-		let commonItem = '';
 
 		for (const item of leftBag) {
 			if (rightBag.has(item)) {
-				commonItem = item;
-				break;
+				return sum + getPrio(item);
 			}
 		}
-		if (!commonItem) {
-			return sum;
-		}
 
-		const prio =
-			1 +
-			(az.includes(commonItem)
-				? az.indexOf(commonItem)
-				: 26 + AZ.indexOf(commonItem));
-
-		return sum + prio;
+		return sum;
 	}, 0);
 }
+
+export const getPrio = (item: string) =>
+	1 + (az.includes(item) ? az.indexOf(item) : 26 + AZ.indexOf(item));
