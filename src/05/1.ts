@@ -23,7 +23,7 @@ Example
 
 move 1 from 2 to 1
 */
-const parseCrates = (input: string) => {
+export const parseCrates = (input: string) => {
 	const data = input.split('\n');
 	const blank = data.findIndex((line) => !line);
 	const crates = data.slice(0, blank - 1);
