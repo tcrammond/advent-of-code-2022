@@ -16,6 +16,6 @@ describe('day 4, part 1', () => {
 		expect(fn(input)).toBe(2);
 	});
 	it('avoids tricky hobbitses', () => {
-		expect(fn('3-97,2-2')).toBe(0)
-	})
+		expect(fn('3-97,2-2')).toBe(0);
+	});
 });

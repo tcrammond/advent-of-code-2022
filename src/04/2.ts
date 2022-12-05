@@ -2,14 +2,17 @@ import { lines } from '../util';
 
 export default function getNumberOfPairs(input: string) {
 	const pairs = lines(input).map((str) =>
-		str.split(',').map((str) => str.split('-').map(Number) as [number, number]),
+		str
+			.split(',')
+			.map((str) => str.split('-').map(Number) as [number, number])
+			.sort((a, b) => (b[0] > a[0] ? -1 : 1)),
 	);
 
 	let eclipsedPairs = 0;
+
 	for (const group of pairs) {
 		const [g1, g2] = group;
-
-		if (contained(g1, g2) || contained(g2, g1)) {
+		if (overlapped(g1, g2)) {
 			eclipsedPairs++;
 		}
 	}
@@ -17,5 +20,5 @@ export default function getNumberOfPairs(input: string) {
 	return eclipsedPairs;
 }
 
-const contained = (a: [number, number], b: [number, number]) =>
-	a[0] <= b[1] && b[1] <= a[1] && b[0] >= a[0];
+const overlapped = (a: [number, number], b: [number, number]) =>
+	b[0] <= a[1] || a[0] >= b[0];
