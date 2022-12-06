@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 
 import fn from './1';
 
-const inputs = [
+const inputs: [string, number][] = [
 	['mjqjpqmgbljsphdztnvjfqwrcgsmlb',7],
 	['bvwbjplbgvbhsrlpgdmjqwftvncz', 5],
 	['nppdvjthqldpwncqszvftbrmjlhg', 6],

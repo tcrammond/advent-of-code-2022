@@ -4,7 +4,7 @@ export default function getFirstPacket(input: string) {
 	return parser.readUntilPacketMarker()
 }
 
-function createParser(input: string) {
+export function createParser(input: string) {
 	let i = 0;
 
 	const read = () => {
@@ -12,25 +12,28 @@ function createParser(input: string) {
 		i++;
 		return char
 	}
-	const readUntilPacketMarker = () => {
+	const readUntilUniqueSequence = (n: number) => {
 		const bank: string[] = []
 
 		for (let index = 0; index < input.length; index++) {
-			if (bank.length === 4) {
+			if (bank.length === n) {
 				bank.shift()
 			}
 			bank.push(read())
-			if (new Set(bank).size === 4) {
+			if (new Set(bank).size === n) {
 				return i
 			}
 		}
 
 		return -1
 	}
+	const readUntilPacketMarker = () => readUntilUniqueSequence(4)
+	const readUntilMessageMarker = () => readUntilUniqueSequence(14)
 	const reset = () => { i = 0 }
 
 	return {
 		read,
+		readUntilMessageMarker,
 		readUntilPacketMarker,
 		reset,
 	}
