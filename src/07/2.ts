@@ -1,24 +1,36 @@
 import { sum } from '../math'
-
-
-export default function sumDirectorySizes(input: string) {
+import fs from 'fs'
+export default function smallestDeleteableDirectory(input: string) {
+	const freeSpaceRequired = 30000000
 	const lines = input.split('\n')
-
 	const tree = buildTree(lines)
 
-	let dirSizes: number[] = []
+	let dirSizes: Map<string, number> = new Map()
 
 	const go = (children: Dir['children']) => Array.from(children)
 		.forEach(([key, item]) => {
 			if (!('size' in item)) {
-				dirSizes.push(sumDir(item))
+				dirSizes.set(item.name, sumDir(item))
 				go(item.children)
 			}
 		})
-
 	go(tree.children)
 
-	return dirSizes.filter(size => size <= 100000).reduce(sum)
+	const spaceAvailable = 70000000 - sumDir(tree)
+	const spaceRequired = freeSpaceRequired - spaceAvailable
+	const sizes = Array.from(dirSizes.entries()).sort((a, b) => a[1] - b[1])
+
+	let dirToDelete: any = null
+	for (const dir of sizes) {
+		if (dir[1] >= spaceRequired) {
+			dirToDelete = dir
+			break
+		}
+	}
+	console.log(spaceAvailable, spaceRequired, dirToDelete)
+	fs.writeFileSync('./numbers.txt', JSON.stringify(sizes, null, 2))
+
+	return dirToDelete[1]
 }
 
 export const sumDir = (values: Dir) => Array.from(values.children.entries()).reduce((total: number, [name, item]) => {
